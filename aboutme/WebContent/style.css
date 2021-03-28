@@ -1,0 +1,103 @@
+
+html, body{
+    height: 100%;
+    background-color:#B4CCD3;
+}
+span{
+    display: inline-block;
+}
+.header, .section, .footer{
+    background-color: #D3E1E6;
+    width: 60%;
+    margin:1% auto;
+    text-align: center;
+}
+.header{
+    height: 10%;
+}
+.section{
+    height: 70%;
+}
+.footer{
+    height: 10%;
+}
+.header>.nav-btn{
+    position: relative;
+    left: 20%;
+    top: 30%;
+    border-radius: 10px;
+    height: 30%;
+    width: 10%;
+    margin-left: 1%;
+    background-color: #46555C;
+    color:white;
+}
+.header>.nav-btn:hover{
+    cursor: pointer;
+    background-color: #81AAB3;
+}
+.section>.title{
+    font-size: x-large;
+    margin: 2% 0 2% 0;
+}
+.section>.intro{
+    margin: 0 0 2% 0;
+}
+.section>.square-btn{
+    border-radius: 5px;
+    width: 100px;
+    height: 100px;
+    margin: 0 0 2% 0;
+    background-color: #D45837;
+}
+.section>.square-btn:hover{
+    cursor: pointer;
+}
+.section>.home-img{
+    display: block;
+    margin: auto;
+}
+.section>.article{
+    padding: 5% 10% 0 10%;
+}
+.section>.article>.title{
+    font-size: large;
+    font-weight: bold;
+    display: block;
+    text-align: left;
+}
+.section>.article>.content{
+    display: block;
+    text-align: left;
+}
+.footer>.footer-info{
+    position: relative;
+    top:10%;
+}
+.section>.content{
+    padding-top: 5%;
+    padding-bottom: 5%;
+    height: 30%;
+    display: block;
+}
+.section>.content>.container{
+    float: left;
+    width: 30%;
+    height: 100%;
+    text-align: left;
+    margin: 0 0 0 5%;
+}
+.section>.content>.container>img{
+    width: auto; height: auto;
+    max-height: 100%;
+    max-width: 100%;
+    border: gray solid 5px;
+}
+.section>.content>.article{
+    height: 100%;
+    padding-right: 2%;
+}
+.section>.content>.article>p{
+    text-align: left;
+    margin: 0;
+}
