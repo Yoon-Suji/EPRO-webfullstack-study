@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import kr.or.connect.guestbook.interceptor.LogInterceptor;
 //DispatcherServlet이 읽어들이는 설정
 
 @Configuration
@@ -42,4 +43,11 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
         resolver.setSuffix(".jsp");
         return resolver;
     }
+	
+    @Override
+    //인터셉터 등록
+	public void addInterceptors(InterceptorRegistry registry) {
+    		registry.addInterceptor(new LogInterceptor());
+	}
+	
 }
