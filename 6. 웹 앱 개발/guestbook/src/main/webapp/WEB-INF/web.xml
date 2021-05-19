@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+  
+  <context-param>
+    <param-name>contextClass</param-name> <!-- 리스너가 실행하는 contextClass -->
+    <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+    </param-value>
+  </context-param>
+  <context-param>
+    <param-name>contextConfigLocation</param-name> <!-- 리스터가 읽어들이는 설정파일 -->
+    <param-value>kr.or.connect.guestbook.config.ApplicationConfig
+    </param-value>
+  </context-param>
+  
+  <!-- Context가 로딩될 때 위의 context-param참고해서 리스터 실행-->
+  <!-- 레이어드 아키텍쳐로 구성해서 비즈니스로직쪽에서 사용되는 설정파일을 나눴기 때문에 그 부분을 읽어들이는 데 필요 -->
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener
+	</listener-class>
+  </listener>
+	
+  <!-- 모든 요청을 DispatcherServlet이 받음, DispatcherServlet을 프론트서블릿으로 등록하는 과정 -->	
+  <servlet>
+    <servlet-name>mvc</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextClass</param-name>
+      <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </init-param>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>kr.or.connect.guestbook.config.WebMvcContextConfiguration</param-value>
+      <!-- 설정 파일 - 클래스, 패키지 명 포함해서 등록해야 함 -->
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>mvc</servlet-name>
+    <url-pattern>/</url-pattern> 
+    <!-- 모든 요청이 들어오면 servlet-name과 같은 서블릿에 등록되어있는 서블릿 클래스가 실행 -->
+  </servlet-mapping>
+  
+  <!-- 요청이 수행되기 전, 응답이 나가기 전 한번씩 수행 -->
+  <filter>
+	<filter-name>encodingFilter</filter-name>
+	<filter-class>org.springframework.web.filter.CharacterEncodingFilter
+	</filter-class> <!-- 한글 인코딩 처리 -->
+	<init-param>
+	  <param-name>encoding</param-name>
+	  <param-value>UTF-8</param-value> <!--  -->
+	</init-param>
+  </filter>
+  <filter-mapping>
+	<filter-name>encodingFilter</filter-name>
+	<url-pattern>/*</url-pattern> <!-- 모든 요청에 대해서 적용 -->
+  </filter-mapping>    
+  
+
+	
+</web-app>
