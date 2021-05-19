@@ -1,15 +1,20 @@
 package kr.or.connect.guestbook.config;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
 import kr.or.connect.guestbook.interceptor.LogInterceptor;
+import kr.or.connect.guestbook.argumentresolver.HeaderMapArgumentResolver;
 //DispatcherServlet이 읽어들이는 설정
 
 @Configuration
@@ -46,8 +51,17 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
 	
     @Override
     //인터셉터 등록
-	public void addInterceptors(InterceptorRegistry registry) {
-    		registry.addInterceptor(new LogInterceptor());
-	}
+    public void addInterceptors(InterceptorRegistry registry) {
+    	registry.addInterceptor(new LogInterceptor());
+    }
+    
+    @Override
+//    아규먼트 리졸버를 적용하려면 WebMvcContextConfiguration 클래스에 addArgumentResolvers메소드를 오버라이딩 하고, 
+//    인자로 넘어온 argumentResolvers에 앞에서 생성한 아규먼트 리졸버를 넘겨줘야 합니다.
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+    	System.out.println("아규먼트 리졸버 등록..");
+	argumentResolvers.add(new HeaderMapArgumentResolver());
+    }
+	
 	
 }
