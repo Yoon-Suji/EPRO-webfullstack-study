@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import kr.or.connect.guestbook.argumentresolver.HeaderInfo;
 import kr.or.connect.guestbook.dto.Guestbook;
 import kr.or.connect.guestbook.service.GuestbookService;
 
@@ -28,7 +29,14 @@ public class GuestbookController {
 	
 	@GetMapping(path = "/list")
 	public String list(@RequestParam(name = "start", required = false, defaultValue = "0") int start, 
-			ModelMap model, @CookieValue(value="count",defaultValue="0",required=true) String value, HttpServletResponse response) {
+			ModelMap model, @CookieValue(value="count",defaultValue="0",required=true) String value, 
+			   HttpServletResponse response, HeaderInfo headerInfo) {
+		
+//		GuestbookController 의 메소드인 list메소드의 인자로  HeaderInfo headerInfo를 추가합니다.
+//		콘솔에 headerInfo의 get메소드에 user-agent를 넘겨서 값이 잘 출력되는지 확인할 수 있도록 코드를 추가합니다.
+		System.out.println("-----------------------------------------------------");
+		System.out.println(headerInfo.get("user-agent"));
+		System.out.println("-----------------------------------------------------");
 		
 		//---쿠키를 이용한 상태유지 실습---
 		/* HttpServletRequest request를 이용한 방법
